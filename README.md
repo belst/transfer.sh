@@ -184,6 +184,7 @@ ip-whitelist | comma separated list of ips allowed to connect to the service    
 ip-blacklist | comma separated list of ips not allowed to connect to the service                    |                               | IP_BLACKLIST                  |
 temp-path | path to temp folder                                                                     | system temp                   | TEMP_PATH                     |
 web-path | path to static web files (for development or custom front end)                           |                               | WEB_PATH                      |
+default-inline | return inline URL in PUT response body instead of download URL                     | false                         | DEFAULT_INLINE                |
 proxy-path | path prefix when service is run behind a proxy (a `/` prefix will be trimmed)          |                               | PROXY_PATH                    |
 proxy-port | port of the proxy when the service is run behind a proxy                               |                               | PROXY_PORT                    |
 email-contact | email contact for the front end                                                     |                               | EMAIL_CONTACT                 |
