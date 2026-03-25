@@ -734,7 +734,13 @@ func (s *Server) putHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "text/plain")
 
 	filename = url.PathEscape(filename)
-	relativeURL, _ := url.Parse(path.Join(s.proxyPath, token, filename))
+
+	var relativeURL *url.URL
+	if s.defaultInline {
+		relativeURL, _ = url.Parse(path.Join(s.proxyPath, "inline", token, filename))
+	} else {
+		relativeURL, _ = url.Parse(path.Join(s.proxyPath, token, filename))
+	}
 	deleteURL, _ := url.Parse(path.Join(s.proxyPath, token, filename, metadata.DeletionToken))
 
 	w.Header().Set("X-Url-Delete", resolveURL(r, deleteURL, s.proxyPort))

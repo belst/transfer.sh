@@ -56,6 +56,11 @@ var globalFlags = []cli.Flag{
 		Usage:   "",
 		EnvVars: []string{"FORCE_HTTPS"},
 	},
+	&cli.BoolFlag{
+		Name:    "default-inline",
+		Usage:   "return inline URL in PUT response body instead of download URL",
+		EnvVars: []string{"DEFAULT_INLINE"},
+	},
 	&cli.StringFlag{
 		Name:    "tls-listener",
 		Usage:   "127.0.0.1:8443",
@@ -438,6 +443,10 @@ func New() *Cmd {
 		} else if pk := c.String("tls-private-key"); pk == "" {
 		} else {
 			options = append(options, server.TLSConfig(cert, pk))
+		}
+
+		if c.Bool("default-inline") {
+			options = append(options, server.DefaultInline(true))
 		}
 
 		if c.Bool("profiler") {

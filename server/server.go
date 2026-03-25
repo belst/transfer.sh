@@ -80,6 +80,13 @@ func PerformClamavPrescan(b bool) OptionFn {
 	}
 }
 
+// DefaultInline enables returning the inline URL as the PUT response body
+func DefaultInline(b bool) OptionFn {
+	return func(srvr *Server) {
+		srvr.defaultInline = b
+	}
+}
+
 // VirustotalKey sets virus total key
 func VirustotalKey(s string) OptionFn {
 	return func(srvr *Server) {
@@ -367,6 +374,7 @@ type Server struct {
 	VirusTotalKey        string
 	ClamAVDaemonHost     string
 	performClamavPrescan bool
+	defaultInline        bool
 
 	tempPath string
 
